@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fotbollssimulator – PWA</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://accounts.google.com/gsi/client" async></script>
+</head>
+<body>
+  <header class="bar">
+    <div class="brand">⚽ Fotbollssimulator</div>
+    <div class="spacer"></div>
+    <button id="install-btn" class="ghost small" hidden>Installera</button>
+    <button id="login-btn" class="primary small">Logga in med Google</button>
+    <button id="logout-btn" class="ghost small" hidden>Logga ut</button>
+  </header>
+
+  <main id="app">
+    <section class="card">
+      <h1>Välkommen</h1>
+      <p>Detta är en enkel fotbollssimulator som sparar data på ditt Google Drive-konto.</p>
+      <ol>
+        <li>Logga in med Google.</li>
+        <li>Appen letar efter <code>league.json</code> i din Drive.</li>
+        <li>Om filen saknas: skapa en ny liga.</li>
+        <li>Redigera lagens namn och koefficienter.</li>
+      </ol>
+      <p class="small muted">Tips: Efter att du loggat in en gång kan appen försöka hämta token tyst nästa gång (om Google-sessionen finns kvar i webbläsaren).</p>
+    </section>
+  </main>
+
+  <footer>
+    <span class="muted small">PWA med Google Drive-stöd. Ingen backend. Din data ligger i ditt Google-konto.</span>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+    }
+  </script>
+</body>
+</html>
